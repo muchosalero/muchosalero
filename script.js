@@ -2,30 +2,41 @@ document.addEventListener('DOMContentLoaded', () => {
   const acordeones = document.querySelectorAll('.acordeon-cabecera');
   const navMenu = document.querySelector('.nav');
   const menuToggle = document.querySelector('.menu-toggle');
+  const dropdown = document.querySelector('.dropdown');
+  const dropBtn = document.querySelector('.dropbtn');
 
-  // Función universal para plegar el menú móvil de 3 rayitas
-  function cerrarMenuMovil() {
-    if (navMenu) {
-      navMenu.classList.remove('active', 'open', 'show');
-    }
+  // Función para cerrar todo el menú de 3 rayitas y sus submenús
+  function cerrarMenuCompleto() {
+    if (navMenu) navMenu.classList.remove('active');
+    if (dropdown) dropdown.classList.remove('open');
   }
 
-  // 1. Abrir / Cerrar el menú de 3 rayitas
+  // 1. Botón de las 3 rayitas
   if (menuToggle && navMenu) {
     menuToggle.addEventListener('click', (e) => {
       e.stopPropagation();
       navMenu.classList.toggle('active');
+      if (dropdown) dropdown.classList.remove('open');
     });
   }
 
-  // Función para cerrar todas las colecciones del catálogo
+  // 2. Botón desplegable de Colección
+  if (dropBtn && dropdown) {
+    dropBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      dropdown.classList.toggle('open');
+    });
+  }
+
+  // Función para cerrar todas las secciones del catálogo
   function cerrarTodasLasColecciones() {
     document.querySelectorAll('.coleccion-seccion').forEach(seccion => {
       seccion.classList.remove('activa');
     });
   }
 
-  // 2. Clic en los acordeones del catálogo
+  // 3. Clics en los acordeones del catálogo
   acordeones.forEach(cabecera => {
     cabecera.addEventListener('click', () => {
       const seccionPadre = cabecera.parentElement;
@@ -39,13 +50,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 3. Detectar clic en CUALQUIER enlace dentro de la navegación (<nav>)
+  // 4. Clic en las opciones de las colecciones (Aire Flamenco, Florales, etc.)
   if (navMenu) {
     navMenu.querySelectorAll('a').forEach(enlace => {
       enlace.addEventListener('click', (e) => {
         const href = enlace.getAttribute('href');
 
-        // Si es un enlace a una sección del catálogo (#aire-flamenco, etc.)
         if (href && href.startsWith('#') && href !== '#') {
           const idObjetivo = href.substring(1);
           const seccionObjetivo = document.getElementById(idObjetivo);
@@ -54,15 +64,18 @@ document.addEventListener('DOMContentLoaded', () => {
             cerrarTodasLasColecciones();
             seccionObjetivo.classList.add('activa');
           }
-          
-          // Cerramos el menú móvil tras elegir opción
-          cerrarMenuMovil();
-        } 
-        // Si es Inicio, Nosotros o Contacto
-        else if (href && !href.includes('javascript')) {
-          cerrarMenuMovil();
+
+          // Cierra inmediatamente las 3 rayitas y la caja flotante
+          cerrarMenuCompleto();
+        } else if (href && !href.includes('javascript')) {
+          cerrarMenuCompleto();
         }
       });
     });
   }
+
+  // Cerrar si hace clic fuera del menú
+  document.addEventListener('click', () => {
+    cerrarMenuCompleto();
+  });
 });
