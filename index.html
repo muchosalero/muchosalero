@@ -6,7 +6,7 @@
 
   <title>Mucho Salero | Joyas</title>
 
- <link rel="stylesheet" href="style.css?v=3">
+<link rel="stylesheet" href="style.css?v=6">S
 </head>
 
 <body>
@@ -22,9 +22,15 @@
       ☰
     </button>
 
-    <nav class="nav">
+   <nav class="nav">
       <a href="#inicio">Inicio</a>
-      <a href="#coleccion">Colección</a>
+      <div class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">Colección ▾</a>
+        <div class="dropdown-content">
+          <a href="#aire-flamenco">Aire Flamenco</a>
+          <a href="#clase-geometrica">Clase Geométrica</a>
+        </div>
+      </div>
       <a href="#nosotros">Nosotros</a>
       <a href="#contacto">Contacto</a>
     </nav>
@@ -46,10 +52,11 @@
     <!-- ====================
          COLECCIÓN
     ==================== -->
-    <section id="coleccion" class="coleccion-seccion">
-      
-      <h2>Colección</h2>
-      <p class="subtitulo">Aire Flamenco</p>
+   <section id="aire-flamenco" class="coleccion-seccion">
+  <div class="acordeon-cabecera">
+    <h2>📁 Aire Flamenco</h2>
+    <span class="flecha-acordeon">▼</span>
+  </div>
 
       <div class="catalogo-grid">
 
@@ -94,9 +101,11 @@
     </section>
 
     <!-- SECCIÓN: CLASE GEOMÉTRICA -->
-    <section class="coleccion-seccion">
-      <h2 class="titulo-coleccion">Colección</h2>
-      <p class="subtitulo-coleccion">CLASE GEOMÉTRICA</p>
+ <section id="clase-geometrica" class="coleccion-seccion">
+  <div class="acordeon-cabecera">
+    <h2>📁 Clase Geométrica</h2>
+    <span class="flecha-acordeon">▼</span>
+  </div>
 
       <div class="catalogo-grid">
         <article class="tarjeta-producto">
