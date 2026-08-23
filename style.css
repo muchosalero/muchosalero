@@ -651,3 +651,24 @@ p {
   margin-top: 1.2rem;
   font-weight: 500;
 }
+/* ===================================
+   TAMANO DEL LOGO PRINCIPAL (HEROE)
+=================================== */
+
+.heroe {
+  padding: 3rem 1rem;
+  text-align: center;
+}
+
+.logotipo-del-heroe img {
+  max-width: 320px !important; /* Limita el ancho del logo */
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Cursor de lupa en las fotos de productos */
+.tarjeta-producto img {
+  cursor: pointer;
+}
