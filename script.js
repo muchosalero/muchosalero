@@ -2,41 +2,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const acordeones = document.querySelectorAll('.acordeon-cabecera');
   const navMenu = document.querySelector('.nav');
   const menuToggle = document.querySelector('.menu-toggle');
-  const dropdown = document.querySelector('.dropdown');
-  const dropBtn = document.querySelector('.dropbtn');
+  const enlacesSubmenu = document.querySelectorAll('.dropdown-content a');
 
-  // Función para cerrar todo el menú de 3 rayitas y sus submenús
-  function cerrarMenuCompleto() {
-    if (navMenu) navMenu.classList.remove('active');
-    if (dropdown) dropdown.classList.remove('open');
-  }
-
-  // 1. Botón de las 3 rayitas
+  // 1. Abrir / Cerrar el menú principal de 3 rayitas
   if (menuToggle && navMenu) {
-    menuToggle.addEventListener('click', (e) => {
-      e.stopPropagation();
+    menuToggle.addEventListener('click', () => {
       navMenu.classList.toggle('active');
-      if (dropdown) dropdown.classList.remove('open');
     });
   }
 
-  // 2. Botón desplegable de Colección
-  if (dropBtn && dropdown) {
-    dropBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      dropdown.classList.toggle('open');
-    });
-  }
-
-  // Función para cerrar todas las secciones del catálogo
+  // Función para cerrar todas las colecciones del catálogo
   function cerrarTodasLasColecciones() {
     document.querySelectorAll('.coleccion-seccion').forEach(seccion => {
       seccion.classList.remove('activa');
     });
   }
 
-  // 3. Clics en los acordeones del catálogo
+  // 2. Clic en los encabezados del catálogo en la página
   acordeones.forEach(cabecera => {
     cabecera.addEventListener('click', () => {
       const seccionPadre = cabecera.parentElement;
@@ -50,32 +32,26 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 4. Clic en las opciones de las colecciones (Aire Flamenco, Florales, etc.)
-  if (navMenu) {
-    navMenu.querySelectorAll('a').forEach(enlace => {
-      enlace.addEventListener('click', (e) => {
-        const href = enlace.getAttribute('href');
+  // 3. Clic en CUALQUIERA de las colecciones del menú desplegable
+  enlacesSubmenu.forEach(enlace => {
+    enlace.addEventListener('click', (e) => {
+      const href = enlace.getAttribute('href');
 
-        if (href && href.startsWith('#') && href !== '#') {
-          const idObjetivo = href.substring(1);
-          const seccionObjetivo = document.getElementById(idObjetivo);
+      if (href && href.startsWith('#')) {
+        const idObjetivo = href.substring(1);
+        const seccionObjetivo = document.getElementById(idObjetivo);
 
-          if (seccionObjetivo) {
-            cerrarTodasLasColecciones();
-            seccionObjetivo.classList.add('activa');
-          }
-
-          // Cierra inmediatamente las 3 rayitas y la caja flotante
-          cerrarMenuCompleto();
-        } else if (href && !href.includes('javascript')) {
-          cerrarMenuCompleto();
+        if (seccionObjetivo) {
+          // Abrir la colección elegida
+          cerrarTodasLasColecciones();
+          seccionObjetivo.classList.add('activa');
         }
-      });
-    });
-  }
 
-  // Cerrar si hace clic fuera del menú
-  document.addEventListener('click', () => {
-    cerrarMenuCompleto();
+        // CERRAR EL MENÚ DE LAS 3 RAYITAS DE INMEDIATO
+        if (navMenu) {
+          navMenu.classList.remove('active');
+        }
+      }
+    });
   });
 });
