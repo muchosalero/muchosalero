@@ -1,3 +1,4 @@
+// Menú desplegable para móvil
 const menuToggle = document.querySelector(".menu-toggle");
 const nav = document.querySelector(".nav");
 
@@ -13,17 +14,31 @@ document.querySelectorAll(".nav a").forEach(link => {
   });
 });
 
-document.getElementById("year").textContent = new Date().getFullYear();
-// Abrir imagen en pantalla completa al hacer clic
-document.querySelectorAll('.tarjeta-producto img').forEach(img => {
-  img.addEventListener('click', () => {
-    const modal = document.getElementById('visor-imagen');
-    const modalImg = document.getElementById('imagen-ampliada-src');
-    modal.style.display = 'flex';
-    modalImg.src = img.src;
+// Poner el año actual en el pie de página
+const yearEl = document.getElementById("year");
+if (yearEl) {
+  yearEl.textContent = new Date().getFullYear();
+}
+
+// VISOR LIGHTBOX (Abre la imagen exclusiva en Grande)
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("visor-imagen");
+  const modalImg = document.getElementById("imagen-ampliada-src");
+
+  // Escucha el clic en TODAS las fotos de productos
+  document.querySelectorAll(".catalogo-grid img, .tarjeta-producto img").forEach(img => {
+    img.style.cursor = "pointer";
+    img.addEventListener("click", (e) => {
+      e.stopPropagation();
+      modal.style.display = "flex";
+      modalImg.src = img.src;
+    });
   });
 });
 
 function cerrarVisor() {
-  document.getElementById('visor-imagen').style.display = 'none';
+  const modal = document.getElementById("visor-imagen");
+  if (modal) {
+    modal.style.display = "none";
+  }
 }
