@@ -876,3 +876,8 @@ p {
   display: block;
 }
 
+/* Asegurar visibilidad de fotos al desplegar */
+.coleccion-seccion.activa .catalogo-grid,
+.coleccion-seccion.active .catalogo-grid {
+  display: grid !important;
+}
