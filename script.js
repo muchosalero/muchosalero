@@ -2,9 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const acordeones = document.querySelectorAll('.acordeon-cabecera');
   const navMenu = document.querySelector('.nav');
   const menuToggle = document.querySelector('.menu-toggle');
-  const enlacesSubmenu = document.querySelectorAll('.dropdown-content a');
+  const enlacesMenu = document.querySelectorAll('.nav a');
 
-  // 1. Abrir/Cerrar menú principal de 3 rayitas
+  // 1. Alternar menú de 3 rayitas
   if (menuToggle && navMenu) {
     menuToggle.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -12,40 +12,39 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 2. Clic en las cabeceras del catálogo
+  // Función para ocultar todas las colecciones
+  function cerrarColecciones() {
+    document.querySelectorAll('.coleccion-seccion').forEach(sec => {
+      sec.classList.remove('activa');
+    });
+  }
+
+  // 2. Acordeones del catálogo principal
   acordeones.forEach(cabecera => {
     cabecera.addEventListener('click', () => {
-      const seccionPadre = cabecera.closest('.coleccion-seccion');
-      if (!seccionPadre) return;
-
-      const yaEstaAbierta = seccionPadre.classList.contains('activa');
-
-      document.querySelectorAll('.coleccion-seccion').forEach(s => s.classList.remove('activa', 'active'));
-
-      if (!yaEstaAbierta) {
-        seccionPadre.classList.add('activa');
-      }
+      const seccion = cabecera.closest('.coleccion-seccion');
+      const abierta = seccion.classList.contains('activa');
+      
+      cerrarColecciones();
+      if (!abierta) seccion.classList.add('activa');
     });
   });
 
-  // 3. Clic en el submenú del navegador
-  enlacesSubmenu.forEach(enlace => {
+  // 3. Clics en los enlaces de navegación (cierra el menú y abre la colección)
+  enlacesMenu.forEach(enlace => {
     enlace.addEventListener('click', () => {
       const href = enlace.getAttribute('href');
-
-      if (href && href.startsWith('#')) {
-        const seccionObjetivo = document.getElementById(href.substring(1));
-
-        if (seccionObjetivo) {
-          document.querySelectorAll('.coleccion-seccion').forEach(s => s.classList.remove('activa', 'active'));
-          seccionObjetivo.classList.add('activa');
-        }
-
-        // Plegar menú móvil
-        if (navMenu) {
-          navMenu.classList.remove('active');
+      
+      if (href && href.startsWith('#') && href !== '#') {
+        const objetivo = document.getElementById(href.substring(1));
+        if (objetivo) {
+          cerrarColecciones();
+          objetivo.classList.add('activa');
         }
       }
+      
+      // Ocultar menú de 3 rayitas tras la selección
+      if (navMenu) navMenu.classList.remove('active');
     });
   });
 });
