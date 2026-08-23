@@ -707,47 +707,86 @@ p {
   font-size: 40px;
   font-weight: bold;
 }
-/* --- ESTILOS DE CARPETAS / ACORDEÓN (OCULTAS POR DEFECTO) --- */
+/* --- ESTILOS MEJORADOS PARA CARPETAS / ACORDEÓN --- */
 .coleccion-seccion {
-  margin-bottom: 20px;
-  border: 1px solid #e0e0e0;
-  border-radius: 12px;
+  margin: 25px auto;
+  max-width: 900px;
+  border: 1px solid #e2d2c8;
+  border-radius: 16px;
   overflow: hidden;
-  background-color: #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  background-color: #ffffff;
+  box-shadow: 0 4px 15px rgba(138, 43, 6, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.coleccion-seccion:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(138, 43, 6, 0.12);
 }
 
 .acordeon-cabecera {
-  padding: 18px 25px;
+  padding: 22px 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  background-color: #fcfcfc;
-  transition: background-color 0.3s ease;
+  background: linear-gradient(135deg, #faf6f3 0%, #f4eae4 100%);
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
   user-select: none;
 }
 
-.acordeon-cabecera:hover {
-  background-color: #f3f3f3;
+.coleccion-seccion.abierta .acordeon-cabecera {
+  background: linear-gradient(135deg, #8a2b06 0%, #6e2003 100%);
+  border-bottom-color: #d4a373;
 }
 
 .acordeon-cabecera h2 {
   margin: 0;
-  font-size: 1.25rem;
-  color: #333;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #5a200b;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
+  letter-spacing: 0.5px;
+  transition: color 0.3s ease;
+}
+
+.coleccion-seccion.abierta .acordeon-cabecera h2 {
+  color: #ffffff;
 }
 
 .flecha-acordeon {
-  font-size: 1rem;
-  transition: transform 0.3s ease;
-  color: #666;
+  font-size: 0.9rem;
+  color: #8a2b06;
+  background: #ffffff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease, color 0.3s ease;
 }
 
-/* IMPORTANTE: Las fotos parten completamente OCULTAS */
+.coleccion-seccion.abierta .flecha-acordeon {
+  transform: rotate(180deg);
+  background: #d4a373;
+  color: #ffffff;
+}
+
+/* Ocultar el catálogo por defecto */
+.coleccion-seccion .catalogo-grid {
+  display: none !important;
+  padding: 30px 20px;
+  background-color: #faf9f8;
+}
+
+.coleccion-seccion.abierta .catalogo-grid {
+  display: grid !important;
+}
 .coleccion-seccion .catalogo-grid {
   display: none !important;
   padding: 20px;
