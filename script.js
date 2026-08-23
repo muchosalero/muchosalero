@@ -1,4 +1,4 @@
-// Menú desplegable para móvil
+// Menú hamburguesa para móvil
 const menuToggle = document.querySelector(".menu-toggle");
 const nav = document.querySelector(".nav");
 
@@ -14,24 +14,49 @@ document.querySelectorAll(".nav a").forEach(link => {
   });
 });
 
-// Poner el año actual en el pie de página
+// Año actual en el footer
 const yearEl = document.getElementById("year");
 if (yearEl) {
   yearEl.textContent = new Date().getFullYear();
 }
 
-// VISOR LIGHTBOX (Abre la imagen exclusiva en Grande)
+// LÓGICA DE COLECCIONES (ACORDEÓN) Y VISOR DE IMÁGENES
 document.addEventListener("DOMContentLoaded", () => {
+  // 1. Abrir y cerrar la carpeta al hacer clic en la cabecera
+  const cabeceras = document.querySelectorAll(".acordeon-cabecera");
+
+  cabeceras.forEach(cabecera => {
+    cabecera.addEventListener("click", () => {
+      const coleccion = cabecera.parentElement;
+      coleccion.classList.toggle("abierta");
+    });
+  });
+
+  // 2. Si pulsan en el menú superior, viaja a la sección Y abre la carpeta
+  document.querySelectorAll(".dropdown-content a").forEach(enlace => {
+    enlace.addEventListener("click", (e) => {
+      const targetId = enlace.getAttribute("href");
+      if (targetId && targetId.startsWith("#")) {
+        const seccionTarget = document.querySelector(targetId);
+        if (seccionTarget) {
+          seccionTarget.classList.add("abierta");
+        }
+      }
+    });
+  });
+
+  // 3. Ampliar foto a pantalla completa al hacer clic
   const modal = document.getElementById("visor-imagen");
   const modalImg = document.getElementById("imagen-ampliada-src");
 
-  // Escucha el clic en TODAS las fotos de productos
   document.querySelectorAll(".catalogo-grid img, .tarjeta-producto img").forEach(img => {
     img.style.cursor = "pointer";
     img.addEventListener("click", (e) => {
-      e.stopPropagation();
-      modal.style.display = "flex";
-      modalImg.src = img.src;
+      e.stopPropagation(); // Evita que se cierre el acordeón al pulsar la foto
+      if (modal && modalImg) {
+        modal.style.display = "flex";
+        modalImg.src = img.src;
+      }
     });
   });
 });
