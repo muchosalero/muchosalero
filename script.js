@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Función auxiliar para cerrar todas las colecciones
+  // Función para cerrar todas las colecciones
   function cerrarColecciones() {
     document.querySelectorAll('.coleccion-seccion').forEach(seccion => {
       seccion.classList.remove('activa');
@@ -53,5 +53,44 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
     });
+  });
+
+  // 4. Modal para ampliar imágenes (Zoom)
+  // Crear el contenedor del modal en el HTML si no existe
+  let modal = document.getElementById('imagen-modal');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'imagen-modal';
+    modal.className = 'modal-imagen';
+    modal.innerHTML = `
+      <span class="cerrar-modal">&times;</span>
+      <img class="contenido-modal" id="img-ampliada" alt="Vista ampliada">
+    `;
+    document.body.appendChild(modal);
+  }
+
+  const modalImg = document.getElementById('img-ampliada');
+  const botonCerrar = modal.querySelector('.cerrar-modal');
+
+  // Evento al hacer clic en cualquier imagen del catálogo
+  document.querySelectorAll('.tarjeta-producto img').forEach(img => {
+    img.addEventListener('click', () => {
+      modal.style.display = 'flex';
+      modalImg.src = img.src;
+      modalImg.alt = img.alt;
+    });
+  });
+
+  // Cerrar el modal al hacer clic en la (X) o fuera de la imagen
+  if (botonCerrar) {
+    botonCerrar.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+  }
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+    }
   });
 });
