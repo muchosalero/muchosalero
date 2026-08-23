@@ -707,68 +707,71 @@ p {
   font-size: 40px;
   font-weight: bold;
 }
-/* --- ESTILOS MEJORADOS PARA CARPETAS / ACORDEÓN --- */
+/* --- BANNERS DE COLECCIÓN CON ARTE Y SALERO --- */
 .coleccion-seccion {
   margin: 25px auto;
-  max-width: 900px;
-  border: 1px solid #e2d2c8;
-  border-radius: 16px;
+  max-width: 850px;
+  border-radius: 20px;
   overflow: hidden;
-  background-color: #ffffff;
-  box-shadow: 0 4px 15px rgba(138, 43, 6, 0.06);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: #ffffff;
+  border: 2px solid #8a2b06;
+  box-shadow: 0 8px 20px rgba(138, 43, 6, 0.15);
+  transition: all 0.3s ease;
 }
 
 .coleccion-seccion:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(138, 43, 6, 0.12);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(138, 43, 6, 0.25);
 }
 
+/* Cabecera principal como tarjeta de impacto */
 .acordeon-cabecera {
-  padding: 22px 30px;
+  padding: 22px 35px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  background: linear-gradient(135deg, #faf6f3 0%, #f4eae4 100%);
-  border-bottom: 2px solid transparent;
+  background: linear-gradient(135deg, #8a2b06 0%, #5a1802 100%);
   transition: all 0.3s ease;
   user-select: none;
 }
 
-.coleccion-seccion.abierta .acordeon-cabecera {
-  background: linear-gradient(135deg, #8a2b06 0%, #6e2003 100%);
-  border-bottom-color: #d4a373;
+.acordeon-cabecera:hover {
+  background: linear-gradient(135deg, #a03308 0%, #6e1f03 100%);
 }
 
 .acordeon-cabecera h2 {
   margin: 0;
-  font-size: 1.35rem;
-  font-weight: 600;
-  color: #5a200b;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 1px;
+  text-transform: uppercase;
   display: flex;
   align-items: center;
-  gap: 12px;
-  letter-spacing: 0.5px;
-  transition: color 0.3s ease;
+  gap: 15px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
-.coleccion-seccion.abierta .acordeon-cabecera h2 {
-  color: #ffffff;
-}
-
+/* Botón de la flecha con toque dorado */
 .flecha-acordeon {
   font-size: 0.9rem;
   color: #8a2b06;
-  background: #ffffff;
-  width: 32px;
-  height: 32px;
+  background: #fdf8f5;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease, color 0.3s ease;
+  border: 2px solid #d4a373;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease;
+}
+
+/* Cuando está abierta */
+.coleccion-seccion.abierta .acordeon-cabecera {
+  border-bottom: 3px solid #d4a373;
 }
 
 .coleccion-seccion.abierta .flecha-acordeon {
@@ -777,62 +780,13 @@ p {
   color: #ffffff;
 }
 
-/* Ocultar el catálogo por defecto */
+/* Interior del catálogo desplegado */
 .coleccion-seccion .catalogo-grid {
   display: none !important;
-  padding: 30px 20px;
-  background-color: #faf9f8;
+  padding: 35px 25px;
+  background-color: #faf6f3;
 }
 
 .coleccion-seccion.abierta .catalogo-grid {
   display: grid !important;
-}
-.coleccion-seccion .catalogo-grid {
-  display: none !important;
-  padding: 20px;
-}
-
-/* Solo cuando la carpeta tiene la clase "abierta", se MUESTRAN las fotos */
-.coleccion-seccion.abierta .catalogo-grid {
-  display: grid !important;
-}
-
-.coleccion-seccion.abierta .flecha-acordeon {
-  transform: rotate(180deg);
-}
-
-/* --- MENÚ DESPLEGABLE BARRA SUPERIOR --- */
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #ffffff;
-  min-width: 180px;
-  box-shadow: 0px 8px 16px rgba(0,0,0,0.15);
-  border-radius: 8px;
-  z-index: 1000;
-  right: 0;
-  overflow: hidden;
-}
-
-.dropdown-content a {
-  color: #333333;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  font-size: 0.95rem;
-  transition: background-color 0.2s ease;
-}
-
-.dropdown-content a:hover {
-  background-color: #f1f1f1;
-  color: #000;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
 }
