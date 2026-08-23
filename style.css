@@ -876,8 +876,18 @@ p {
   display: block;
 }
 
-/* Asegurar visibilidad de fotos al desplegar */
-.coleccion-seccion.activa .catalogo-grid,
-.coleccion-seccion.active .catalogo-grid {
+/* Control de visibilidad del catálogo */
+.coleccion-seccion .catalogo-grid {
+  display: none;
+}
+
+.coleccion-seccion.activa .catalogo-grid {
   display: grid !important;
+}
+
+/* Forzar plegado del menú móvil */
+@media (max-width: 768px) {
+  .nav:not(.active) {
+    display: none !important;
+  }
 }
