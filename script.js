@@ -2,9 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const acordeones = document.querySelectorAll('.acordeon-cabecera');
   const navMenu = document.querySelector('.nav');
   const menuToggle = document.querySelector('.menu-toggle');
-  const enlacesMenu = document.querySelectorAll('.nav a');
+  const enlacesSubmenu = document.querySelectorAll('.dropdown-content a, .nav > a');
 
-  // 1. Alternar menú de 3 rayitas
+  // 1. Mostrar/Ocultar el menú de 3 rayitas
   if (menuToggle && navMenu) {
     menuToggle.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -12,39 +12,46 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Función para ocultar todas las colecciones
+  // Función auxiliar para cerrar todas las colecciones
   function cerrarColecciones() {
-    document.querySelectorAll('.coleccion-seccion').forEach(sec => {
-      sec.classList.remove('activa');
+    document.querySelectorAll('.coleccion-seccion').forEach(seccion => {
+      seccion.classList.remove('activa');
     });
   }
 
-  // 2. Acordeones del catálogo principal
+  // 2. Acordeones en la página (al hacer clic en los títulos)
   acordeones.forEach(cabecera => {
     cabecera.addEventListener('click', () => {
-      const seccion = cabecera.closest('.coleccion-seccion');
-      const abierta = seccion.classList.contains('activa');
-      
+      const seccionPadre = cabecera.closest('.coleccion-seccion');
+      if (!seccionPadre) return;
+
+      const yaAbierta = seccionPadre.classList.contains('activa');
       cerrarColecciones();
-      if (!abierta) seccion.classList.add('activa');
+
+      if (!yaAbierta) {
+        seccionPadre.classList.add('activa');
+      }
     });
   });
 
-  // 3. Clics en los enlaces de navegación (cierra el menú y abre la colección)
-  enlacesMenu.forEach(enlace => {
+  // 3. Clics en el menú desplegable (cerrar menú móvil y mostrar colección)
+  enlacesSubmenu.forEach(enlace => {
     enlace.addEventListener('click', () => {
       const href = enlace.getAttribute('href');
-      
+
       if (href && href.startsWith('#') && href !== '#') {
         const objetivo = document.getElementById(href.substring(1));
+
         if (objetivo) {
           cerrarColecciones();
           objetivo.classList.add('activa');
         }
+
+        // Cierra el menú de las 3 rayitas de inmediato
+        if (navMenu) {
+          navMenu.classList.remove('active');
+        }
       }
-      
-      // Ocultar menú de 3 rayitas tras la selección
-      if (navMenu) navMenu.classList.remove('active');
     });
   });
 });
