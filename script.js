@@ -1,17 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
   const acordeones = document.querySelectorAll('.acordeon-cabecera');
-  const enlacesMenu = document.querySelectorAll('.dropdown-content a, .nav > a');
   const navMenu = document.querySelector('.nav');
   const menuToggle = document.querySelector('.menu-toggle');
 
-  // 1. Abrir / Cerrar el menú principal de las 3 rayitas
+  // Función universal para plegar el menú móvil de 3 rayitas
+  function cerrarMenuMovil() {
+    if (navMenu) {
+      navMenu.classList.remove('active', 'open', 'show');
+    }
+  }
+
+  // 1. Abrir / Cerrar el menú de 3 rayitas
   if (menuToggle && navMenu) {
-    menuToggle.addEventListener('click', () => {
+    menuToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
       navMenu.classList.toggle('active');
     });
   }
 
-  // Función para cerrar todas las colecciones desplegables del catálogo
+  // Función para cerrar todas las colecciones del catálogo
   function cerrarTodasLasColecciones() {
     document.querySelectorAll('.coleccion-seccion').forEach(seccion => {
       seccion.classList.remove('activa');
@@ -32,25 +39,30 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 3. Clic en cualquier enlace del menú superior (cierra el menú de 3 rayitas y abre la colección)
-  enlacesMenu.forEach(enlace => {
-    enlace.addEventListener('click', () => {
-      const href = enlace.getAttribute('href');
+  // 3. Detectar clic en CUALQUIER enlace dentro de la navegación (<nav>)
+  if (navMenu) {
+    navMenu.querySelectorAll('a').forEach(enlace => {
+      enlace.addEventListener('click', (e) => {
+        const href = enlace.getAttribute('href');
 
-      if (href && href.startsWith('#')) {
-        const idObjetivo = href.substring(1);
-        const seccionObjetivo = document.getElementById(idObjetivo);
+        // Si es un enlace a una sección del catálogo (#aire-flamenco, etc.)
+        if (href && href.startsWith('#') && href !== '#') {
+          const idObjetivo = href.substring(1);
+          const seccionObjetivo = document.getElementById(idObjetivo);
 
-        if (seccionObjetivo) {
-          cerrarTodasLasColecciones();
-          seccionObjetivo.classList.add('activa');
+          if (seccionObjetivo) {
+            cerrarTodasLasColecciones();
+            seccionObjetivo.classList.add('activa');
+          }
+          
+          // Cerramos el menú móvil tras elegir opción
+          cerrarMenuMovil();
+        } 
+        // Si es Inicio, Nosotros o Contacto
+        else if (href && !href.includes('javascript')) {
+          cerrarMenuMovil();
         }
-      }
-
-      // Cerrar el menú móvil de 3 rayitas tras hacer clic
-      if (navMenu) {
-        navMenu.classList.remove('active');
-      }
+      });
     });
-  });
+  }
 });
