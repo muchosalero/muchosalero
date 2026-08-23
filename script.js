@@ -2,38 +2,48 @@ document.addEventListener('DOMContentLoaded', () => {
   const acordeones = document.querySelectorAll('.acordeon-cabecera');
   const navMenu = document.querySelector('.nav');
   const menuToggle = document.querySelector('.menu-toggle');
-  const enlacesSubmenu = document.querySelectorAll('.dropdown-content a');
+  const enlacesDropdown = document.querySelectorAll('.dropdown-content a');
 
-  // 1. Abrir / Cerrar el menú principal de 3 rayitas
+  // 1. Abrir/Cerrar menú principal de 3 rayitas
   if (menuToggle && navMenu) {
-    menuToggle.addEventListener('click', () => {
+    menuToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
       navMenu.classList.toggle('active');
     });
   }
 
-  // Función para cerrar todas las colecciones del catálogo
+  // Función para cerrar todas las colecciones
   function cerrarTodasLasColecciones() {
     document.querySelectorAll('.coleccion-seccion').forEach(seccion => {
-      seccion.classList.remove('activa');
+      seccion.classList.remove('activa', 'active');
     });
   }
 
-  // 2. Clic en los encabezados del catálogo en la página
+  // Función para abrir una colección concreta
+  function abrirColeccion(seccion) {
+    if (seccion) {
+      seccion.classList.add('activa', 'active');
+    }
+  }
+
+  // 2. Clic en las cabeceras de cada colección (en el catálogo)
   acordeones.forEach(cabecera => {
     cabecera.addEventListener('click', () => {
-      const seccionPadre = cabecera.parentElement;
-      const yaEstaAbierta = seccionPadre.classList.contains('activa');
+      const seccionPadre = cabecera.closest('.coleccion-seccion');
+      if (!seccionPadre) return;
+
+      const yaEstaAbierta = seccionPadre.classList.contains('activa') || seccionPadre.classList.contains('active');
 
       cerrarTodasLasColecciones();
 
       if (!yaEstaAbierta) {
-        seccionPadre.classList.add('activa');
+        abrirColeccion(seccionPadre);
       }
     });
   });
 
-  // 3. Clic en CUALQUIERA de las colecciones del menú desplegable
-  enlacesSubmenu.forEach(enlace => {
+  // 3. Clic en las opciones del menú desplegable (Aire Flamenco, Florales, etc.)
+  enlacesDropdown.forEach(enlace => {
     enlace.addEventListener('click', (e) => {
       const href = enlace.getAttribute('href');
 
@@ -42,12 +52,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const seccionObjetivo = document.getElementById(idObjetivo);
 
         if (seccionObjetivo) {
-          // Abrir la colección elegida
           cerrarTodasLasColecciones();
-          seccionObjetivo.classList.add('activa');
+          abrirColeccion(seccionObjetivo);
         }
 
-        // CERRAR EL MENÚ DE LAS 3 RAYITAS DE INMEDIATO
+        // Fuerza el cierre inmediato del menú móvil de 3 rayitas
         if (navMenu) {
           navMenu.classList.remove('active');
         }
