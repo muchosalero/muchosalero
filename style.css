@@ -875,14 +875,4 @@ p {
 .nav .dropdown:hover .dropdown-content {
   display: block;
 }
-/* Forzar ocultado del submenú en móvil tras hacer clic */
-@media (max-width: 768px) {
-  .dropdown-content {
-    display: none !important;
-  }
-  .dropdown.open .dropdown-content,
-  .dropdown:focus-within .dropdown-content {
-    display: flex !important;
-    flex-direction: column;
-  }
-}
+
