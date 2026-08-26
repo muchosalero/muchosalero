@@ -987,44 +987,63 @@ p {
 /* --- FIX FINAL: BANNER VISIBLE Y PRECIOS EN ORDENADOR --- */
 
 /* 1. Forzar visibilidad y posición del banner promocional arriba de la cabecera */
-/* --- FIX TOTAL: BANNER Y PRECIOS MÓVIL --- */
+/* =========================================================
+   FIX DEFINITIVO: BANNER Y PRECIOS (TODOS LOS DISPOSITIVOS)
+   ========================================================= */
 
-/* 1. Solución Precios en Móvil */
-@media (max-width: 768px) {
-  .catalogo-grid,
-  .coleccion-seccion,
-  .tarjeta-producto {
-    height: auto !important;
-    max-height: none !important;
-    overflow: visible !important;
-  }
-  
-  .precio-producto {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    color: #8a2b06 !important;
-    font-size: 1rem !important;
-    font-weight: 700 !important;
-  }
+/* 1. MOSTRAR PRECIOS SIEMPRE (MÓVIL Y ORDENADOR) */
+.catalogo-grid,
+.coleccion-seccion,
+.tarjeta-producto {
+  height: auto !important;
+  max-height: none !important;
+  min-height: fit-content !important;
+  overflow: visible !important;
 }
 
-/* 2. Solución Banner */
-header.header, 
-.header,
-nav {
-  position: relative !important;
+.precio-producto {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  color: #8a2b06 !important;
+  font-size: 1.1rem !important;
+  font-weight: bold !important;
+  margin-top: 8px !important;
+  margin-bottom: 8px !important;
 }
 
+/* 2. BANNER PROMOCIONAL VISIBLE EN ORDENADOR Y MÓVIL */
 .banner-promocion {
   display: block !important;
   visibility: visible !important;
   position: relative !important;
-  z-index: 9999 !important;
+  z-index: 99999 !important;
   width: 100% !important;
   background-color: #8a2b06 !important;
   color: #ffffff !important;
   text-align: center !important;
-  padding: 12px 10px !important;
-  font-size: 0.9rem !important;
+  padding: 10px 12px !important;
+  font-size: 0.88rem !important;
+  font-weight: 600 !important;
+  box-sizing: border-box !important;
+}
+
+/* Evitar que en móvil la cabecera fija se coma el banner */
+@media (max-width: 768px) {
+  body {
+    padding-top: 0 !important;
+  }
+  
+  header,
+  .header,
+  .site-header,
+  nav {
+    position: relative !important;
+    top: 0 !important;
+  }
+  
+  .banner-promocion {
+    font-size: 0.8rem !important;
+    padding: 8px 10px !important;
+  }
 }
