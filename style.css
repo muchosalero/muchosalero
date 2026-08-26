@@ -923,42 +923,64 @@ p {
   cursor: pointer;
   user-select: none;
 }
-/* Banner de Promoción de Envío */
+/* --- CORRECCIÓN: BANNER PROMOCIONAL --- */
 .banner-promocion {
   background-color: #8a2b06;
   color: #ffffff;
   text-align: center;
   padding: 10px 15px;
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: 0.85rem;
+  font-weight: 600;
   letter-spacing: 0.5px;
-}
-/* Estilos para los precios de los productos */
-.precio-producto {
-  color: #8a2b06;
-  font-size: 1.15rem;
-  font-weight: bold;
-  margin-top: 6px;
-  margin-bottom: 4px;
-}
-/* Asegura que la tarjeta pueda posicionar la etiqueta */
-.tarjeta-producto {
-  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  line-height: 1.4;
+  display: block;
 }
 
-/* Etiqueta de Producto Vendido / Agotado */
+/* En móviles, aseguramos que el texto respire y no se corte */
+@media (max-width: 768px) {
+  .banner-promocion {
+    font-size: 0.8rem;
+    padding: 8px 10px;
+  }
+}
+
+/* --- CORRECCIÓN: TARJETAS Y PRECIOS --- */
+.tarjeta-producto {
+  position: relative; /* Indispensable para la etiqueta Agotado */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: visible; /* Permite que el precio y la etiqueta se vean bien */
+}
+
+.precio-producto {
+  color: #8a2b06 !important;
+  font-size: 1.1rem !important;
+  font-weight: 700 !important;
+  margin-top: 8px !important;
+  margin-bottom: 6px !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* --- CORRECCIÓN: ETIQUETA AGOTADO / VENDIDO --- */
 .etiqueta-vendido {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: #8a2b06;
-  color: #ffffff;
-  font-size: 0.75rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  padding: 4px 10px;
-  border-radius: 12px;
-  letter-spacing: 0.5px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-  z-index: 5;
+  position: absolute !important;
+  top: 10px !important;
+  right: 10px !important;
+  background-color: #8a2b06 !important;
+  color: #ffffff !important;
+  font-size: 0.75rem !important;
+  font-weight: bold !important;
+  text-transform: uppercase !important;
+  padding: 5px 10px !important;
+  border-radius: 12px !important;
+  letter-spacing: 0.5px !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3) !important;
+  z-index: 99 !important; /* Fuerza a que aparezca siempre encima de la foto */
+  display: inline-block !important;
 }
