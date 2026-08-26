@@ -984,14 +984,9 @@ p {
   z-index: 99 !important; /* Fuerza a que aparezca siempre encima de la foto */
   display: inline-block !important;
 }
-/* --- FIX FINAL: BANNER VISIBLE Y PRECIOS EN ORDENADOR --- */
+/* --- FIX FINAL Y DEFINITIVO --- */
 
-/* 1. Forzar visibilidad y posición del banner promocional arriba de la cabecera */
-/* =========================================================
-   FIX DEFINITIVO: BANNER Y PRECIOS (TODOS LOS DISPOSITIVOS)
-   ========================================================= */
-
-/* 1. MOSTRAR PRECIOS SIEMPRE (MÓVIL Y ORDENADOR) */
+/* 1. MOSTRAR PRECIOS SIEMPRE */
 .catalogo-grid,
 .coleccion-seccion,
 .tarjeta-producto {
@@ -1012,11 +1007,26 @@ p {
   margin-bottom: 8px !important;
 }
 
-/* 2. BANNER PROMOCIONAL VISIBLE EN ORDENADOR Y MÓVIL */
+/* 2. BANNER VISIBLE EN ORDENADOR Y MÓVIL */
+body {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+header,
+.header,
+.site-header,
+nav {
+  position: relative !important;
+  top: 0 !important;
+}
+
 .banner-promocion {
   display: block !important;
   visibility: visible !important;
   position: relative !important;
+  top: 0 !important;
+  left: 0 !important;
   z-index: 99999 !important;
   width: 100% !important;
   background-color: #8a2b06 !important;
@@ -1026,24 +1036,5 @@ p {
   font-size: 0.88rem !important;
   font-weight: 600 !important;
   box-sizing: border-box !important;
-}
-
-/* Evitar que en móvil la cabecera fija se coma el banner */
-@media (max-width: 768px) {
-  body {
-    padding-top: 0 !important;
-  }
-  
-  header,
-  .header,
-  .site-header,
-  nav {
-    position: relative !important;
-    top: 0 !important;
-  }
-  
-  .banner-promocion {
-    font-size: 0.8rem !important;
-    padding: 8px 10px !important;
-  }
+  margin: 0 !important;
 }
