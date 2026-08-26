@@ -933,3 +933,11 @@ p {
   font-weight: 500;
   letter-spacing: 0.5px;
 }
+/* Estilos para los precios de los productos */
+.precio-producto {
+  color: #8a2b06;
+  font-size: 1.15rem;
+  font-weight: bold;
+  margin-top: 6px;
+  margin-bottom: 4px;
+}
