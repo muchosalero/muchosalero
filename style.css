@@ -941,3 +941,24 @@ p {
   margin-top: 6px;
   margin-bottom: 4px;
 }
+/* Asegura que la tarjeta pueda posicionar la etiqueta */
+.tarjeta-producto {
+  position: relative;
+}
+
+/* Etiqueta de Producto Vendido / Agotado */
+.etiqueta-vendido {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #8a2b06;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 12px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  z-index: 5;
+}
