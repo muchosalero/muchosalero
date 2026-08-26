@@ -923,3 +923,13 @@ p {
   cursor: pointer;
   user-select: none;
 }
+/* Banner de Promoción de Envío */
+.banner-promocion {
+  background-color: #8a2b06;
+  color: #ffffff;
+  text-align: center;
+  padding: 10px 15px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
