@@ -987,39 +987,44 @@ p {
 /* --- FIX FINAL: BANNER VISIBLE Y PRECIOS EN ORDENADOR --- */
 
 /* 1. Forzar visibilidad y posición del banner promocional arriba de la cabecera */
+/* --- FIX TOTAL: BANNER Y PRECIOS MÓVIL --- */
+
+/* 1. Solución Precios en Móvil */
+@media (max-width: 768px) {
+  .catalogo-grid,
+  .coleccion-seccion,
+  .tarjeta-producto {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+  
+  .precio-producto {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    color: #8a2b06 !important;
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+  }
+}
+
+/* 2. Solución Banner */
+header.header, 
+.header,
+nav {
+  position: relative !important;
+}
+
 .banner-promocion {
   display: block !important;
   visibility: visible !important;
   position: relative !important;
-  z-index: 1000 !important;
+  z-index: 9999 !important;
   width: 100% !important;
   background-color: #8a2b06 !important;
   color: #ffffff !important;
   text-align: center !important;
-  padding: 10px 15px !important;
-  box-sizing: border-box !important;
-}
-
-/* Ajuste por si el menú fijo tapa el contenido superior */
-body {
-  padding-top: 0 !important;
-}
-
-/* 2. Forzar que las tarjetas en ordenador no corten ni oculten los precios */
-.tarjeta-producto {
-  height: auto !important;
-  max-height: none !important;
-  overflow: visible !important;
-  min-height: fit-content !important;
-}
-
-.precio-producto {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  font-size: 1.15rem !important;
-  font-weight: bold !important;
-  color: #8a2b06 !important;
-  margin-top: 8px !important;
-  margin-bottom: 8px !important;
+  padding: 12px 10px !important;
+  font-size: 0.9rem !important;
 }
